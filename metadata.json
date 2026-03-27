@@ -1,0 +1,7 @@
+{
+  "name": "Tap Hotel Bolgatanga",
+  "description": "A premium hospitality experience in the heart of Bolgatanga, Ghana, offering luxury rooms, fine dining, and exceptional service.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
