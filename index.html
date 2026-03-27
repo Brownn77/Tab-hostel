@@ -4,124 +4,761 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tap Hotel Bolgatanga | Luxury in the North</title>
-    <link rel="stylesheet" href="/src/index.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <!-- Plain CSS Styles -->
+    <style>
+      :root {
+        --brand-gold: #C5A059;
+        --brand-dark: #1A1A1A;
+        --brand-cream: #F9F7F2;
+        --white: #FFFFFF;
+        --gray-50: #F9FAFB;
+        --gray-100: #F3F4F6;
+        --gray-400: #9CA3AF;
+        --gray-500: #6B7280;
+        --gray-600: #4B5563;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        color: var(--brand-dark);
+        background-color: var(--white);
+        line-height: 1.5;
+      }
+
+      h1, h2, h3, h4, .font-serif {
+        font-family: 'Cormorant Garamond', serif;
+      }
+
+      .max-w-7xl {
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+      .py-24 { padding-top: 6rem; padding-bottom: 6rem; }
+
+      /* Navbar */
+      #navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        transition: all 0.3s ease;
+      }
+
+      #navbar.scrolled {
+        background-color: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+      }
+
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo-text {
+        font-size: 1.5rem;
+        font-weight: bold;
+        letter-spacing: -0.05em;
+        text-decoration: none;
+      }
+
+      .logo-text.white { color: var(--white); }
+      .logo-text.dark { color: var(--brand-dark); }
+
+      .nav-links {
+        display: none;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      @media (min-width: 768px) {
+        .nav-links { display: flex; }
+      }
+
+      .nav-link {
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .nav-link.white { color: var(--white); }
+      .nav-link.dark { color: var(--brand-dark); }
+      .nav-link:hover { color: var(--brand-gold); }
+
+      .btn-book {
+        background-color: var(--brand-gold);
+        color: var(--white);
+        padding: 0.5rem 1.5rem;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: opacity 0.2s;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn-book:hover { opacity: 0.9; }
+
+      /* Mobile Menu */
+      #mobile-menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+      }
+
+      #mobile-menu-toggle.white { color: var(--white); }
+      #mobile-menu-toggle.dark { color: var(--brand-dark); }
+
+      @media (min-width: 768px) {
+        #mobile-menu-toggle { display: none; }
+      }
+
+      #mobile-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--white);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      /* Utility Classes for JS */
+      .navbar-scrolled {
+        background-color: rgba(255, 255, 255, 0.9) !important;
+        backdrop-filter: blur(12px) !important;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+        padding-top: 0.75rem !important;
+        padding-bottom: 0.75rem !important;
+      }
+      .navbar-transparent {
+        background-color: transparent !important;
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+      }
+      .text-dark { color: var(--brand-dark) !important; }
+      .text-white { color: var(--white) !important; }
+      .hidden { display: none !important; }
+      .active { display: flex !important; }
+
+      /* Hero Section */
+      .hero {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+      }
+
+      .hero-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      .hero-content {
+        position: relative;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+      }
+
+      .hero-tag {
+        color: var(--brand-gold);
+        font-weight: 600;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        display: block;
+      }
+
+      .hero-title {
+        font-size: 3rem;
+        color: var(--white);
+        line-height: 1.1;
+        margin-bottom: 2rem;
+      }
+
+      @media (min-width: 768px) {
+        .hero-title { font-size: 5rem; }
+      }
+
+      .hero-desc {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.125rem;
+        margin-bottom: 2.5rem;
+        font-weight: 300;
+        line-height: 1.6;
+        max-width: 40rem;
+      }
+
+      .hero-btns {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      @media (min-width: 640px) {
+        .hero-btns { flex-direction: row; }
+      }
+
+      .btn-primary {
+        background-color: var(--brand-gold);
+        color: var(--white);
+        padding: 1rem 2rem;
+        border-radius: 9999px;
+        font-weight: bold;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        transition: opacity 0.2s;
+      }
+
+      .btn-secondary {
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: var(--white);
+        padding: 1rem 2rem;
+        border-radius: 9999px;
+        font-weight: bold;
+        text-decoration: none;
+        text-align: center;
+        transition: background-color 0.2s;
+      }
+
+      /* About Section */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      @media (min-width: 1024px) {
+        .about-grid { grid-template-columns: 1fr 1fr; }
+      }
+
+      .about-img-container {
+        position: relative;
+      }
+
+      .about-img {
+        position: relative;
+        z-index: 10;
+        border-radius: 1.5rem;
+        overflow: hidden;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      }
+
+      .about-img img { width: 100%; height: auto; }
+
+      .about-bg-accent {
+        position: absolute;
+        bottom: -2.5rem;
+        right: -2.5rem;
+        width: 100%;
+        height: 100%;
+        background-color: var(--brand-cream);
+        z-index: -10;
+        border-radius: 1.5rem;
+      }
+
+      .about-badge {
+        position: absolute;
+        top: -2.5rem;
+        left: -2.5rem;
+        background-color: var(--brand-gold);
+        padding: 2rem;
+        border-radius: 1rem;
+        color: var(--white);
+        display: none;
+      }
+
+      @media (min-width: 768px) {
+        .about-badge { display: block; }
+      }
+
+      /* Rooms Section */
+      .bg-cream { background-color: var(--brand-cream); }
+      .text-center { text-align: center; }
+      .mb-16 { margin-bottom: 4rem; }
+
+      .rooms-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      @media (min-width: 768px) {
+        .rooms-grid { grid-template-columns: repeat(3, 1fr); }
+      }
+
+      .room-card {
+        background-color: var(--white);
+        overflow: hidden;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        transition: all 0.5s ease;
+      }
+
+      .room-card:hover {
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      .room-img {
+        position: relative;
+        height: 16rem;
+        overflow: hidden;
+      }
+
+      .room-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.7s ease;
+      }
+
+      .room-card:hover .room-img img {
+        transform: scale(1.1);
+      }
+
+      .room-price {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background-color: var(--brand-dark);
+        color: var(--white);
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        font-weight: bold;
+      }
+
+      .room-content { padding: 2rem; }
+
+      .room-title {
+        font-size: 1.5rem;
+        color: var(--brand-dark);
+        margin-bottom: 0.75rem;
+      }
+
+      .room-desc {
+        color: var(--gray-500);
+        font-size: 0.875rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .room-amenities {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .room-amenity {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.75rem;
+        color: var(--gray-400);
+      }
+
+      .btn-outline {
+        width: 100%;
+        border: 1px solid var(--brand-dark);
+        padding: 0.75rem;
+        font-size: 0.875rem;
+        font-weight: bold;
+        letter-spacing: 0.1em;
+        background: none;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .btn-outline:hover {
+        background-color: var(--brand-dark);
+        color: var(--white);
+      }
+
+      /* Amenities */
+      .amenities-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      @media (min-width: 640px) {
+        .amenities-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+
+      @media (min-width: 1024px) {
+        .amenities-grid { grid-template-columns: repeat(3, 1fr); }
+      }
+
+      .amenity-item {
+        transition: all 0.3s;
+      }
+
+      .amenity-icon {
+        margin-bottom: 1.5rem;
+        display: inline-block;
+        padding: 1rem;
+        background-color: var(--brand-cream);
+        border-radius: 1rem;
+        transition: all 0.3s;
+      }
+
+      .amenity-item:hover .amenity-icon {
+        background-color: var(--brand-gold);
+        color: var(--white);
+      }
+
+      /* Booking Section */
+      .booking-section {
+        background-color: var(--brand-dark);
+        color: var(--white);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .booking-form-card {
+        background-color: var(--white);
+        padding: 2rem;
+        border-radius: 1.5rem;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        color: var(--brand-dark);
+      }
+
+      @media (min-width: 768px) {
+        .booking-form-card { padding: 3rem; }
+      }
+
+      .form-group { margin-bottom: 1.5rem; }
+      .form-label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--gray-400);
+        margin-bottom: 0.5rem;
+      }
+
+      .input-wrapper { position: relative; }
+      .input-icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--gray-400);
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 0.75rem 1rem 0.75rem 3rem;
+        background-color: var(--gray-50);
+        border: 1px solid var(--gray-100);
+        border-radius: 0.75rem;
+        outline: none;
+        transition: all 0.2s;
+      }
+
+      .form-input:focus {
+        border-color: var(--brand-gold);
+        box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.2);
+      }
+
+      .btn-submit {
+        width: 100%;
+        background-color: var(--brand-gold);
+        color: var(--white);
+        padding: 1rem;
+        border-radius: 0.75rem;
+        font-weight: bold;
+        letter-spacing: 0.1em;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s;
+        box-shadow: 0 10px 15px -3px rgba(197, 160, 89, 0.2);
+      }
+
+      /* Footer */
+      .footer {
+        background-color: var(--brand-dark);
+        color: var(--white);
+        padding-top: 6rem;
+        padding-bottom: 3rem;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        margin-bottom: 6rem;
+      }
+
+      @media (min-width: 768px) {
+        .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+
+      @media (min-width: 1024px) {
+        .footer-grid { grid-template-columns: repeat(4, 1fr); }
+      }
+
+      .social-links { display: flex; gap: 1rem; }
+      .social-link {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        text-decoration: none;
+        transition: background-color 0.2s;
+      }
+
+      .social-link:hover { background-color: var(--brand-gold); }
+
+      .footer-links { list-style: none; }
+      .footer-links li { margin-bottom: 1rem; }
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.6);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .footer-links a:hover { color: var(--brand-gold); }
+
+      .contact-info { list-style: none; }
+      .contact-info li {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .contact-icon { color: var(--brand-gold); flex-shrink: 0; }
+
+      .newsletter-form { display: flex; gap: 0.5rem; }
+      .newsletter-input {
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+        color: var(--white);
+        outline: none;
+        width: 100%;
+      }
+
+      .btn-join {
+        background-color: var(--brand-gold);
+        color: var(--white);
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        color: rgba(255, 255, 255, 0.3);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      @media (min-width: 768px) {
+        .footer-bottom { flex-direction: row; justify-content: space-between; }
+      }
+
+      /* Utilities */
+      .hidden { display: none; }
+      .flex { display: flex; }
+      .flex-col { flex-direction: column; }
+      .items-center { align-items: center; }
+      .justify-center { justify-content: center; }
+      .gap-2 { gap: 0.5rem; }
+      .gap-4 { gap: 1rem; }
+      .gap-8 { gap: 2rem; }
+      .w-full { width: 100%; }
+      .h-screen { height: 100vh; }
+      .relative { position: relative; }
+      .absolute { position: absolute; }
+      .z-10 { z-index: 10; }
+      .italic { font-style: italic; }
+      .font-bold { font-weight: bold; }
+      .uppercase { text-transform: uppercase; }
+      .tracking-widest { letter-spacing: 0.1em; }
+      .text-white { color: var(--white); }
+      .text-brand-gold { color: var(--brand-gold); }
+      .text-brand-dark { color: var(--brand-dark); }
+    </style>
+    
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
   </head>
-  <body class="font-sans text-[#1A1A1A] bg-white selection:bg-[#C5A059] selection:text-white">
+  <body class="">
     
     <!-- Navbar -->
-    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4">
-      <div class="max-w-7xl mx-auto flex items-center justify-between">
-        <a href="#home" class="flex items-center gap-2">
-          <span class="text-2xl font-serif font-bold tracking-tighter text-white logo-text">
+    <nav id="navbar" class="navbar navbar-transparent">
+      <div class="max-w-7xl px-6" style="display: flex; align-items: center; justify-content: space-between; height: 100%;">
+        <a href="#home" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+          <span class="logo-text white" style="font-size: 1.5rem; font-weight: 700; letter-spacing: 0.05em;">
             TAP HOTEL
           </span>
         </a>
 
         <!-- Desktop Nav -->
-        <div class="hidden md:flex items-center gap-8">
-          <a href="#home" class="nav-link text-sm font-medium uppercase tracking-widest text-white hover:text-[#C5A059] transition-colors">Home</a>
-          <a href="#about" class="nav-link text-sm font-medium uppercase tracking-widest text-white hover:text-[#C5A059] transition-colors">About</a>
-          <a href="#rooms" class="nav-link text-sm font-medium uppercase tracking-widest text-white hover:text-[#C5A059] transition-colors">Rooms</a>
-          <a href="#amenities" class="nav-link text-sm font-medium uppercase tracking-widest text-white hover:text-[#C5A059] transition-colors">Amenities</a>
-          <a href="#contact" class="nav-link text-sm font-medium uppercase tracking-widest text-white hover:text-[#C5A059] transition-colors">Contact</a>
-          <a href="#booking" class="bg-[#C5A059] text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-opacity-90 transition-all">
+        <div class="nav-links">
+          <a href="#home" class="nav-link white">Home</a>
+          <a href="#about" class="nav-link white">About</a>
+          <a href="#rooms" class="nav-link white">Rooms</a>
+          <a href="#amenities" class="nav-link white">Amenities</a>
+          <a href="#contact" class="nav-link white">Contact</a>
+          <a href="#booking" class="btn-book">
             BOOK NOW
           </a>
         </div>
 
         <!-- Mobile Toggle -->
-        <button id="mobile-menu-toggle" class="md:hidden p-2 text-white">
+        <button id="mobile-menu-toggle" class="white">
           <i data-lucide="menu"></i>
         </button>
       </div>
 
       <!-- Mobile Menu -->
-      <div id="mobile-menu" class="hidden absolute top-full left-0 right-0 bg-white shadow-xl p-6 flex flex-col gap-4 md:hidden">
-        <a href="#home" class="text-[#1A1A1A] text-lg font-serif border-b border-gray-100 pb-2">Home</a>
-        <a href="#about" class="text-[#1A1A1A] text-lg font-serif border-b border-gray-100 pb-2">About</a>
-        <a href="#rooms" class="text-[#1A1A1A] text-lg font-serif border-b border-gray-100 pb-2">Rooms</a>
-        <a href="#amenities" class="text-[#1A1A1A] text-lg font-serif border-b border-gray-100 pb-2">Amenities</a>
-        <a href="#contact" class="text-[#1A1A1A] text-lg font-serif border-b border-gray-100 pb-2">Contact</a>
-        <a href="#booking" class="bg-[#C5A059] text-white text-center py-3 rounded-lg font-bold">BOOK NOW</a>
+      <div id="mobile-menu">
+        <a href="#home" class="nav-link dark" style="border-bottom: 1px solid var(--gray-100); padding-bottom: 0.5rem;">Home</a>
+        <a href="#about" class="nav-link dark" style="border-bottom: 1px solid var(--gray-100); padding-bottom: 0.5rem;">About</a>
+        <a href="#rooms" class="nav-link dark" style="border-bottom: 1px solid var(--gray-100); padding-bottom: 0.5rem;">Rooms</a>
+        <a href="#amenities" class="nav-link dark" style="border-bottom: 1px solid var(--gray-100); padding-bottom: 0.5rem;">Amenities</a>
+        <a href="#contact" class="nav-link dark" style="border-bottom: 1px solid var(--gray-100); padding-bottom: 0.5rem;">Contact</a>
+        <a href="#booking" class="btn-book" style="text-align: center; border-radius: 0.5rem; padding: 0.75rem;">BOOK NOW</a>
       </div>
     </nav>
 
     <main>
       <!-- Hero Section -->
-      <section id="home" class="relative h-screen w-full overflow-hidden">
-        <div class="absolute inset-0">
+      <section id="home" class="hero">
+        <div class="hero-bg">
           <img
             src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1920&q=80"
             alt="Tap Hotel Exterior"
-            class="w-full h-full object-cover"
             referrerPolicy="no-referrer"
           />
-          <div class="absolute inset-0 bg-black/40"></div>
+          <div class="hero-overlay"></div>
         </div>
 
-        <div class="relative h-full max-w-7xl mx-auto px-6 flex flex-col justify-center items-start">
-          <div class="max-w-2xl">
-            <span class="text-[#C5A059] font-semibold tracking-[0.3em] uppercase mb-4 block">
+        <div class="max-w-7xl px-6" style="position: relative; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: flex-start;">
+          <div style="max-width: 42rem;">
+            <span class="hero-tag">
               Welcome to Bolgatanga
             </span>
-            <h1 class="text-5xl md:text-8xl font-serif text-white leading-tight mb-8">
+            <h1 class="hero-title">
               Refined Luxury <br />
               <span class="italic">in the North</span>
             </h1>
-            <p class="text-white/80 text-lg md:text-xl mb-10 font-light leading-relaxed">
+            <p class="hero-desc">
               Experience the perfect blend of traditional Ghanaian hospitality and modern comfort. 
               Your gateway to the Upper East Region starts here.
             </p>
             
-            <div class="flex flex-col sm:flex-row gap-4">
-              <a href="#rooms" class="bg-[#C5A059] text-white px-8 py-4 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-opacity-90 transition-all group">
+            <div class="hero-btns">
+              <a href="#rooms" class="btn-primary">
                 EXPLORE ROOMS
-                <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                <i data-lucide="arrow-right" style="width: 1rem; height: 1rem;"></i>
               </a>
-              <a href="#about" class="bg-white/10 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-full font-bold hover:bg-white/20 transition-all text-center">
+              <a href="#about" class="btn-secondary">
                 OUR STORY
               </a>
             </div>
           </div>
         </div>
 
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 flex flex-col items-center gap-2 animate-bounce">
-          <span class="text-[10px] uppercase tracking-widest">Scroll</span>
-          <div class="w-[1px] h-12 bg-white/30"></div>
+        <div style="position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); color: rgba(255, 255, 255, 0.5); display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+          <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em;">Scroll</span>
+          <div style="width: 1px; height: 3rem; background-color: rgba(255, 255, 255, 0.3);"></div>
         </div>
       </section>
 
       <!-- About Section -->
-      <section id="about" class="py-24 bg-white overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div class="relative">
-              <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl">
+      <section id="about" class="py-24" style="background-color: var(--white); overflow: hidden;">
+        <div class="max-w-7xl px-6">
+          <div class="about-grid">
+            <div class="about-img-container">
+              <div class="about-img">
                 <img
                   src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80"
                   alt="Hotel Lobby"
-                  class="w-full h-auto"
                   referrerPolicy="no-referrer"
                 />
               </div>
-              <div class="absolute -bottom-10 -right-10 w-full h-full bg-[#F9F7F2] -z-10 rounded-3xl"></div>
-              <div class="absolute -top-10 -left-10 bg-[#C5A059] p-8 rounded-2xl text-white hidden md:block">
-                <span class="text-4xl font-serif block mb-1">15+</span>
-                <span class="text-[10px] uppercase tracking-widest font-bold">Years of Excellence</span>
+              <div class="about-bg-accent"></div>
+              <div class="about-badge">
+                <span style="font-size: 2.25rem; display: block; margin-bottom: 0.25rem;" class="font-serif">15+</span>
+                <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: bold;">Years of Excellence</span>
               </div>
             </div>
 
             <div>
-              <span class="text-[#C5A059] font-semibold tracking-widest uppercase text-sm mb-4 block">
+              <span class="hero-tag" style="font-size: 0.875rem; letter-spacing: 0.1em; margin-bottom: 1rem;">
                 Our Story
               </span>
-              <h2 class="text-4xl md:text-5xl font-serif text-[#1A1A1A] mb-8 leading-tight">
+              <h2 style="font-size: 2.5rem; color: var(--brand-dark); margin-bottom: 2rem; line-height: 1.2;">
                 A Tradition of <br />
                 <span class="italic">Northern Hospitality</span>
               </h2>
-              <div class="space-y-6 text-gray-600 font-light leading-relaxed">
-                <p>
+              <div style="color: var(--gray-600); font-weight: 300; line-height: 1.6;">
+                <p style="margin-bottom: 1.5rem;">
                   Tap Hotel has been a landmark of hospitality in Bolgatanga for over a decade. 
                   We pride ourselves on providing a sanctuary for travelers who appreciate 
                   the finer things in life while staying connected to the local culture.
@@ -134,14 +771,14 @@
                 </p>
               </div>
               
-              <div class="mt-12 grid grid-cols-2 gap-8">
+              <div style="margin-top: 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
                 <div>
-                  <h4 class="text-[#1A1A1A] font-serif text-xl mb-2">Our Mission</h4>
-                  <p class="text-sm text-gray-500 font-light">To provide exceptional service that exceeds expectations.</p>
+                  <h4 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Our Mission</h4>
+                  <p style="font-size: 0.875rem; color: var(--gray-500); font-weight: 300;">To provide exceptional service that exceeds expectations.</p>
                 </div>
                 <div>
-                  <h4 class="text-[#1A1A1A] font-serif text-xl mb-2">Our Vision</h4>
-                  <p class="text-sm text-gray-500 font-light">To be the leading hospitality destination in Northern Ghana.</p>
+                  <h4 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Our Vision</h4>
+                  <p style="font-size: 0.875rem; color: var(--gray-500); font-weight: 300;">To be the leading hospitality destination in Northern Ghana.</p>
                 </div>
               </div>
             </div>
@@ -150,71 +787,71 @@
       </section>
 
       <!-- Rooms Section -->
-      <section id="rooms" class="py-24 bg-[#F9F7F2]">
-        <div class="max-w-7xl mx-auto px-6">
-          <div class="text-center mb-16">
-            <h2 class="text-4xl md:text-5xl font-serif text-[#1A1A1A] mb-4">
+      <section id="rooms" class="py-24" style="background-color: var(--brand-cream);">
+        <div class="max-w-7xl px-6">
+          <div style="text-align: center; margin-bottom: 4rem;">
+            <h2 style="font-size: 3rem; color: var(--brand-dark); margin-bottom: 1rem;">
               Luxurious Accommodations
             </h2>
-            <div class="w-24 h-[1px] bg-[#C5A059] mx-auto mb-6"></div>
-            <p class="text-gray-600 max-w-2xl mx-auto font-light">
+            <div style="width: 6rem; height: 1px; background-color: var(--brand-gold); margin: 0 auto 1.5rem;"></div>
+            <p style="color: var(--gray-600); max-width: 40rem; margin: 0 auto; font-weight: 300;">
               Each of our rooms is designed with your comfort in mind, featuring elegant decor 
               and modern amenities to ensure a restful stay.
             </p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="rooms-grid">
             <!-- Standard Room -->
-            <div class="bg-white group overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
-              <div class="relative h-64 overflow-hidden">
-                <img src="https://picsum.photos/seed/hotel-room-1/800/600" alt="Standard Room" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer">
-                <div class="absolute top-4 right-4 bg-[#1A1A1A] text-white px-4 py-2 text-sm font-bold">GHS 350 / night</div>
+            <div class="room-card">
+              <div class="room-img">
+                <img src="https://picsum.photos/seed/hotel-room-1/800/600" alt="Standard Room" referrerPolicy="no-referrer">
+                <div class="room-price">GHS 350 / night</div>
               </div>
-              <div class="p-8">
-                <h3 class="text-2xl font-serif text-[#1A1A1A] mb-3">Standard Room</h3>
-                <p class="text-gray-500 text-sm mb-6 leading-relaxed">Comfortable and cozy room perfect for solo travelers or couples.</p>
-                <div class="flex flex-wrap gap-4 mb-8">
-                  <div class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="wifi" class="w-3 h-3"></i> Wi-Fi</div>
-                  <div class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="wind" class="w-3 h-3"></i> AC</div>
-                  <div class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="tv" class="w-3 h-3"></i> TV</div>
+              <div class="room-content">
+                <h3 class="room-title">Standard Room</h3>
+                <p class="room-desc">Comfortable and cozy room perfect for solo travelers or couples.</p>
+                <div class="room-amenities">
+                  <div class="room-amenity"><i data-lucide="wifi" style="width: 0.75rem; height: 0.75rem;"></i> Wi-Fi</div>
+                  <div class="room-amenity"><i data-lucide="wind" style="width: 0.75rem; height: 0.75rem;"></i> AC</div>
+                  <div class="room-amenity"><i data-lucide="tv" style="width: 0.75rem; height: 0.75rem;"></i> TV</div>
                 </div>
-                <button class="w-full border border-[#1A1A1A] py-3 text-sm font-bold tracking-widest hover:bg-[#1A1A1A] hover:text-white transition-all">VIEW DETAILS</button>
+                <button class="btn-outline">VIEW DETAILS</button>
               </div>
             </div>
 
             <!-- Deluxe Room -->
-            <div class="bg-white group overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
-              <div class="relative h-64 overflow-hidden">
-                <img src="https://picsum.photos/seed/hotel-room-2/800/600" alt="Deluxe Room" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer">
-                <div class="absolute top-4 right-4 bg-[#1A1A1A] text-white px-4 py-2 text-sm font-bold">GHS 550 / night</div>
+            <div class="room-card">
+              <div class="room-img">
+                <img src="https://picsum.photos/seed/hotel-room-2/800/600" alt="Deluxe Room" referrerPolicy="no-referrer">
+                <div class="room-price">GHS 550 / night</div>
               </div>
-              <div class="p-8">
-                <h3 class="text-2xl font-serif text-[#1A1A1A] mb-3">Deluxe Room</h3>
-                <p class="text-gray-500 text-sm mb-6 leading-relaxed">Spacious room with enhanced amenities and a beautiful city view.</p>
-                <div class="flex flex-wrap gap-4 mb-8">
-                  <div class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="wifi" class="w-3 h-3"></i> Wi-Fi</div>
-                  <div class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="wind" class="w-3 h-3"></i> AC</div>
-                  <div class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="coffee" class="w-3 h-3"></i> Breakfast</div>
+              <div class="room-content">
+                <h3 class="room-title">Deluxe Room</h3>
+                <p class="room-desc">Spacious room with enhanced amenities and a beautiful city view.</p>
+                <div class="room-amenities">
+                  <div class="room-amenity"><i data-lucide="wifi" style="width: 0.75rem; height: 0.75rem;"></i> Wi-Fi</div>
+                  <div class="room-amenity"><i data-lucide="wind" style="width: 0.75rem; height: 0.75rem;"></i> AC</div>
+                  <div class="room-amenity"><i data-lucide="coffee" style="width: 0.75rem; height: 0.75rem;"></i> Breakfast</div>
                 </div>
-                <button class="w-full border border-[#1A1A1A] py-3 text-sm font-bold tracking-widest hover:bg-[#1A1A1A] hover:text-white transition-all">VIEW DETAILS</button>
+                <button class="btn-outline">VIEW DETAILS</button>
               </div>
             </div>
 
             <!-- Executive Suite -->
-            <div class="bg-white group overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
-              <div class="relative h-64 overflow-hidden">
-                <img src="https://picsum.photos/seed/hotel-room-3/800/600" alt="Executive Suite" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer">
-                <div class="absolute top-4 right-4 bg-[#1A1A1A] text-white px-4 py-2 text-sm font-bold">GHS 850 / night</div>
+            <div class="room-card">
+              <div class="room-img">
+                <img src="https://picsum.photos/seed/hotel-room-3/800/600" alt="Executive Suite" referrerPolicy="no-referrer">
+                <div class="room-price">GHS 850 / night</div>
               </div>
-              <div class="p-8">
-                <h3 class="text-2xl font-serif text-[#1A1A1A] mb-3">Executive Suite</h3>
-                <p class="text-gray-500 text-sm mb-6 leading-relaxed">The pinnacle of luxury with a separate living area and premium services.</p>
-                <div class="flex flex-wrap gap-4 mb-8">
-                  <div class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="wifi" class="w-3 h-3"></i> Wi-Fi</div>
-                  <div class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="waves" class="w-3 h-3"></i> VIP</div>
-                  <div class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="coffee" class="w-3 h-3"></i> Breakfast</div>
+              <div class="room-content">
+                <h3 class="room-title">Executive Suite</h3>
+                <p class="room-desc">The pinnacle of luxury with a separate living area and premium services.</p>
+                <div class="room-amenities">
+                  <div class="room-amenity"><i data-lucide="wifi" style="width: 0.75rem; height: 0.75rem;"></i> Wi-Fi</div>
+                  <div class="room-amenity"><i data-lucide="waves" style="width: 0.75rem; height: 0.75rem;"></i> VIP</div>
+                  <div class="room-amenity"><i data-lucide="coffee" style="width: 0.75rem; height: 0.75rem;"></i> Breakfast</div>
                 </div>
-                <button class="w-full border border-[#1A1A1A] py-3 text-sm font-bold tracking-widest hover:bg-[#1A1A1A] hover:text-white transition-all">VIEW DETAILS</button>
+                <button class="btn-outline">VIEW DETAILS</button>
               </div>
             </div>
           </div>
@@ -222,125 +859,125 @@
       </section>
 
       <!-- Amenities Section -->
-      <section id="amenities" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-          <div class="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
-            <div class="max-w-xl">
-              <span class="text-[#C5A059] font-semibold tracking-widest uppercase text-sm mb-4 block">
+      <section id="amenities" class="py-24" style="background-color: var(--white);">
+        <div class="max-w-7xl px-6">
+          <div style="display: flex; flex-direction: column; margin-bottom: 4rem; gap: 2rem;">
+            <div style="max-width: 36rem;">
+              <span class="hero-tag" style="font-size: 0.875rem; letter-spacing: 0.1em; margin-bottom: 1rem;">
                 Our Services
               </span>
-              <h2 class="text-4xl md:text-5xl font-serif text-[#1A1A1A]">
+              <h2 style="font-size: 3rem; color: var(--brand-dark); line-height: 1.2;">
                 Everything you need for a <span class="italic">perfect stay</span>
               </h2>
             </div>
-            <p class="text-gray-500 font-light max-w-sm">
+            <p style="color: var(--gray-500); font-weight: 300; max-width: 24rem;">
               Beyond comfortable rooms, we offer a range of facilities designed to make your 
               visit to Bolgatanga productive and enjoyable.
             </p>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-            <div class="group">
-              <div class="mb-6 inline-block p-4 bg-[#F9F7F2] rounded-2xl group-hover:bg-[#C5A059] group-hover:text-white transition-all duration-300">
-                <i data-lucide="utensils" class="w-8 h-8"></i>
+          <div class="amenities-grid">
+            <div class="amenity-item">
+              <div class="amenity-icon">
+                <i data-lucide="utensils" style="width: 2rem; height: 2rem;"></i>
               </div>
-              <h3 class="text-xl font-serif text-[#1A1A1A] mb-2">Fine Dining</h3>
-              <p class="text-gray-500 text-sm font-light leading-relaxed">Authentic local and continental dishes.</p>
+              <h3 style="font-size: 1.25rem; color: var(--brand-dark); margin-bottom: 0.5rem;">Fine Dining</h3>
+              <p style="color: var(--gray-500); font-size: 0.875rem; font-weight: 300;">Authentic local and continental dishes.</p>
             </div>
-            <div class="group">
-              <div class="mb-6 inline-block p-4 bg-[#F9F7F2] rounded-2xl group-hover:bg-[#C5A059] group-hover:text-white transition-all duration-300">
-                <i data-lucide="beer" class="w-8 h-8"></i>
+            <div class="amenity-item">
+              <div class="amenity-icon">
+                <i data-lucide="beer" style="width: 2rem; height: 2rem;"></i>
               </div>
-              <h3 class="text-xl font-serif text-[#1A1A1A] mb-2">Lounge Bar</h3>
-              <p class="text-gray-500 text-sm font-light leading-relaxed">Relax with our selection of premium drinks.</p>
+              <h3 style="font-size: 1.25rem; color: var(--brand-dark); margin-bottom: 0.5rem;">Lounge Bar</h3>
+              <p style="color: var(--gray-500); font-size: 0.875rem; font-weight: 300;">Relax with our selection of premium drinks.</p>
             </div>
-            <div class="group">
-              <div class="mb-6 inline-block p-4 bg-[#F9F7F2] rounded-2xl group-hover:bg-[#C5A059] group-hover:text-white transition-all duration-300">
-                <i data-lucide="users" class="w-8 h-8"></i>
+            <div class="amenity-item">
+              <div class="amenity-icon">
+                <i data-lucide="users" style="width: 2rem; height: 2rem;"></i>
               </div>
-              <h3 class="text-xl font-serif text-[#1A1A1A] mb-2">Conferences</h3>
-              <p class="text-gray-500 text-sm font-light leading-relaxed">Modern facilities for your business meetings.</p>
+              <h3 style="font-size: 1.25rem; color: var(--brand-dark); margin-bottom: 0.5rem;">Conferences</h3>
+              <p style="color: var(--gray-500); font-size: 0.875rem; font-weight: 300;">Modern facilities for your business meetings.</p>
             </div>
-            <div class="group">
-              <div class="mb-6 inline-block p-4 bg-[#F9F7F2] rounded-2xl group-hover:bg-[#C5A059] group-hover:text-white transition-all duration-300">
-                <i data-lucide="waves" class="w-8 h-8"></i>
+            <div class="amenity-item">
+              <div class="amenity-icon">
+                <i data-lucide="waves" style="width: 2rem; height: 2rem;"></i>
               </div>
-              <h3 class="text-xl font-serif text-[#1A1A1A] mb-2">Swimming Pool</h3>
-              <p class="text-gray-500 text-sm font-light leading-relaxed">A refreshing oasis in the Bolga sun.</p>
+              <h3 style="font-size: 1.25rem; color: var(--brand-dark); margin-bottom: 0.5rem;">Swimming Pool</h3>
+              <p style="color: var(--gray-500); font-size: 0.875rem; font-weight: 300;">A refreshing oasis in the Bolga sun.</p>
             </div>
-            <div class="group">
-              <div class="mb-6 inline-block p-4 bg-[#F9F7F2] rounded-2xl group-hover:bg-[#C5A059] group-hover:text-white transition-all duration-300">
-                <i data-lucide="shield-check" class="w-8 h-8"></i>
+            <div class="amenity-item">
+              <div class="amenity-icon">
+                <i data-lucide="shield-check" style="width: 2rem; height: 2rem;"></i>
               </div>
-              <h3 class="text-xl font-serif text-[#1A1A1A] mb-2">Security</h3>
-              <p class="text-gray-500 text-sm font-light leading-relaxed">24/7 professional security for your peace of mind.</p>
+              <h3 style="font-size: 1.25rem; color: var(--brand-dark); margin-bottom: 0.5rem;">Security</h3>
+              <p style="color: var(--gray-500); font-size: 0.875rem; font-weight: 300;">24/7 professional security for your peace of mind.</p>
             </div>
-            <div class="group">
-              <div class="mb-6 inline-block p-4 bg-[#F9F7F2] rounded-2xl group-hover:bg-[#C5A059] group-hover:text-white transition-all duration-300">
-                <i data-lucide="washing-machine" class="w-8 h-8"></i>
+            <div class="amenity-item">
+              <div class="amenity-icon">
+                <i data-lucide="washing-machine" style="width: 2rem; height: 2rem;"></i>
               </div>
-              <h3 class="text-xl font-serif text-[#1A1A1A] mb-2">Laundry</h3>
-              <p class="text-gray-500 text-sm font-light leading-relaxed">Professional cleaning services for our guests.</p>
+              <h3 style="font-size: 1.25rem; color: var(--brand-dark); margin-bottom: 0.5rem;">Laundry</h3>
+              <p style="color: var(--gray-500); font-size: 0.875rem; font-weight: 300;">Professional cleaning services for our guests.</p>
             </div>
           </div>
         </div>
       </section>
 
       <!-- Booking Section -->
-      <section id="booking" class="py-24 bg-[#1A1A1A] text-white relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-[#C5A059]/10 blur-[100px] rounded-full -mr-48 -mt-48"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#C5A059]/5 blur-[100px] rounded-full -ml-48 -mb-48"></div>
+      <section id="booking" class="booking-section" style="padding-top: 6rem; padding-bottom: 6rem;">
+        <div style="position: absolute; top: 0; right: 0; width: 24rem; height: 24rem; background-color: rgba(197, 160, 89, 0.1); filter: blur(100px); border-radius: 50%; margin-right: -12rem; margin-top: -12rem;"></div>
+        <div style="position: absolute; bottom: 0; left: 0; width: 24rem; height: 24rem; background-color: rgba(197, 160, 89, 0.05); filter: blur(100px); border-radius: 50%; margin-left: -12rem; margin-bottom: -12rem;"></div>
 
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div class="max-w-7xl px-6" style="position: relative; z-index: 10;">
+          <div class="about-grid">
             <div>
-              <span class="text-[#C5A059] font-semibold tracking-widest uppercase text-sm mb-4 block">Reservations</span>
-              <h2 class="text-4xl md:text-6xl font-serif mb-8 leading-tight">Book your stay <br><span class="italic text-[#C5A059]">with us today</span></h2>
-              <p class="text-white/60 text-lg font-light leading-relaxed mb-8">
+              <span class="hero-tag" style="font-size: 0.875rem; letter-spacing: 0.1em; margin-bottom: 1rem;">Reservations</span>
+              <h2 style="font-size: 3.5rem; margin-bottom: 2rem; line-height: 1.1;">Book your stay <br><span class="italic" style="color: var(--brand-gold);">with us today</span></h2>
+              <p style="color: rgba(255, 255, 255, 0.6); font-size: 1.125rem; font-weight: 300; line-height: 1.6; margin-bottom: 2rem;">
                 Planning a visit to Bolgatanga? Secure your room now and enjoy our 
                 premium hospitality. For urgent bookings, call us directly at 
-                <span class="text-white font-medium ml-2">+233 24 123 4567</span>.
+                <span style="color: var(--white); font-weight: 500; margin-left: 0.5rem;">+233 24 123 4567</span>.
               </p>
-              <div class="space-y-6">
-                <div class="flex items-center gap-4">
-                  <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                    <i data-lucide="check-circle-2" class="w-6 h-6 text-[#C5A059]"></i>
+              <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <div style="width: 3rem; height: 3rem; border-radius: 50%; background-color: rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 255, 255, 0.1);">
+                    <i data-lucide="check-circle-2" style="width: 1.5rem; height: 1.5rem; color: var(--brand-gold);"></i>
                   </div>
-                  <span class="text-white/80">Instant confirmation for online requests</span>
+                  <span style="color: rgba(255, 255, 255, 0.8);">Instant confirmation for online requests</span>
                 </div>
-                <div class="flex items-center gap-4">
-                  <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                    <i data-lucide="check-circle-2" class="w-6 h-6 text-[#C5A059]"></i>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                  <div style="width: 3rem; height: 3rem; border-radius: 50%; background-color: rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 255, 255, 0.1);">
+                    <i data-lucide="check-circle-2" style="width: 1.5rem; height: 1.5rem; color: var(--brand-gold);"></i>
                   </div>
-                  <span class="text-white/80">No hidden charges or booking fees</span>
+                  <span style="color: rgba(255, 255, 255, 0.8);">No hidden charges or booking fees</span>
                 </div>
               </div>
             </div>
 
-            <div id="booking-form-container" class="bg-white p-8 md:p-12 rounded-3xl shadow-2xl text-[#1A1A1A]">
-              <form id="booking-form" class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div class="space-y-2">
-                    <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Check-In</label>
-                    <div class="relative">
-                      <i data-lucide="calendar" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
-                      <input type="date" required class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-[#C5A059]/20 focus:border-[#C5A059] outline-none transition-all">
+            <div id="booking-form-container" class="booking-form-card">
+              <form id="booking-form" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                  <div class="form-group">
+                    <label class="form-label">Check-In</label>
+                    <div class="input-wrapper">
+                      <i data-lucide="calendar" class="input-icon" style="width: 1rem; height: 1rem;"></i>
+                      <input type="date" required class="form-input">
                     </div>
                   </div>
-                  <div class="space-y-2">
-                    <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Check-Out</label>
-                    <div class="relative">
-                      <i data-lucide="calendar" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
-                      <input type="date" required class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-[#C5A059]/20 focus:border-[#C5A059] outline-none transition-all">
+                  <div class="form-group">
+                    <label class="form-label">Check-Out</label>
+                    <div class="input-wrapper">
+                      <i data-lucide="calendar" class="input-icon" style="width: 1rem; height: 1rem;"></i>
+                      <input type="date" required class="form-input">
                     </div>
                   </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div class="space-y-2">
-                    <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Guests</label>
-                    <div class="relative">
-                      <i data-lucide="users" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
-                      <select required class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-[#C5A059]/20 focus:border-[#C5A059] outline-none transition-all appearance-none">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                  <div class="form-group">
+                    <label class="form-label">Guests</label>
+                    <div class="input-wrapper">
+                      <i data-lucide="users" class="input-icon" style="width: 1rem; height: 1rem;"></i>
+                      <select required class="form-input" style="appearance: none;">
                         <option value="">Select guests</option>
                         <option value="1">1 Guest</option>
                         <option value="2">2 Guests</option>
@@ -349,11 +986,11 @@
                       </select>
                     </div>
                   </div>
-                  <div class="space-y-2">
-                    <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Room Type</label>
-                    <div class="relative">
-                      <i data-lucide="home" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
-                      <select required class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-[#C5A059]/20 focus:border-[#C5A059] outline-none transition-all appearance-none">
+                  <div class="form-group">
+                    <label class="form-label">Room Type</label>
+                    <div class="input-wrapper">
+                      <i data-lucide="home" class="input-icon" style="width: 1rem; height: 1rem;"></i>
+                      <select required class="form-input" style="appearance: none;">
                         <option value="">Select room</option>
                         <option value="standard">Standard Room</option>
                         <option value="deluxe">Deluxe Room</option>
@@ -362,15 +999,15 @@
                     </div>
                   </div>
                 </div>
-                <div class="space-y-2">
-                  <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Full Name</label>
-                  <input type="text" required placeholder="John Doe" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-[#C5A059]/20 focus:border-[#C5A059] outline-none transition-all">
+                <div class="form-group">
+                  <label class="form-label">Full Name</label>
+                  <input type="text" required placeholder="John Doe" class="form-input" style="padding-left: 1rem;">
                 </div>
-                <div class="space-y-2">
-                  <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Email Address</label>
-                  <input type="email" required placeholder="john@example.com" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-[#C5A059]/20 focus:border-[#C5A059] outline-none transition-all">
+                <div class="form-group">
+                  <label class="form-label">Email Address</label>
+                  <input type="email" required placeholder="john@example.com" class="form-input" style="padding-left: 1rem;">
                 </div>
-                <button type="submit" class="w-full bg-[#C5A059] text-white py-4 rounded-xl font-bold tracking-widest hover:bg-opacity-90 transition-all shadow-lg shadow-[#C5A059]/20">REQUEST BOOKING</button>
+                <button type="submit" class="btn-submit">REQUEST BOOKING</button>
               </form>
             </div>
           </div>
@@ -379,50 +1016,50 @@
     </main>
 
     <!-- Footer -->
-    <footer id="contact" class="bg-[#1A1A1A] text-white pt-24 pb-12">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-24">
-          <div class="col-span-1 lg:col-span-1">
-            <h2 class="text-3xl font-serif mb-6 tracking-tighter">TAP HOTEL</h2>
-            <p class="text-white/50 font-light leading-relaxed mb-8">Experience the best of Northern Ghana hospitality. Luxury, comfort, and culture all in one place.</p>
-            <div class="flex gap-4">
-              <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#C5A059] transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-              <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#C5A059] transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
-              <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#C5A059] transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+    <footer id="contact" class="footer">
+      <div class="max-w-7xl px-6">
+        <div class="footer-grid">
+          <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <h2 style="font-size: 1.875rem; color: var(--white); line-height: 1.2; letter-spacing: -0.05em;">TAP HOTEL</h2>
+            <p style="color: rgba(255, 255, 255, 0.5); font-weight: 300; line-height: 1.6; margin-bottom: 2rem;">Experience the best of Northern Ghana hospitality. Luxury, comfort, and culture all in one place.</p>
+            <div style="display: flex; gap: 1rem;">
+              <a href="#" class="social-link"><i data-lucide="instagram" style="width: 1.25rem; height: 1.25rem;"></i></a>
+              <a href="#" class="social-link"><i data-lucide="facebook" style="width: 1.25rem; height: 1.25rem;"></i></a>
+              <a href="#" class="social-link"><i data-lucide="twitter" style="width: 1.25rem; height: 1.25rem;"></i></a>
             </div>
           </div>
           <div>
-            <h3 class="text-sm font-bold uppercase tracking-widest mb-8">Quick Links</h3>
-            <ul class="space-y-4 text-white/60 font-light">
-              <li><a href="#home" class="hover:text-[#C5A059] transition-colors">Home</a></li>
-              <li><a href="#rooms" class="hover:text-[#C5A059] transition-colors">Rooms & Suites</a></li>
-              <li><a href="#amenities" class="hover:text-[#C5A059] transition-colors">Amenities</a></li>
-              <li><a href="#about" class="hover:text-[#C5A059] transition-colors">About Us</a></li>
-              <li><a href="#booking" class="hover:text-[#C5A059] transition-colors">Reservations</a></li>
+            <h3 style="font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2rem;">Quick Links</h3>
+            <ul style="display: flex; flex-direction: column; gap: 1rem; color: rgba(255, 255, 255, 0.6); font-weight: 300;">
+              <li><a href="#home" class="footer-link">Home</a></li>
+              <li><a href="#rooms" class="footer-link">Rooms & Suites</a></li>
+              <li><a href="#amenities" class="footer-link">Amenities</a></li>
+              <li><a href="#about" class="footer-link">About Us</a></li>
+              <li><a href="#booking" class="footer-link">Reservations</a></li>
             </ul>
           </div>
           <div>
-            <h3 class="text-sm font-bold uppercase tracking-widest mb-8">Contact Us</h3>
-            <ul class="space-y-6 text-white/60 font-light">
-              <li class="flex gap-4"><i data-lucide="map-pin" class="w-5 h-5 text-[#C5A059] shrink-0"></i><span>Bolgatanga, Upper East Region, Ghana</span></li>
-              <li className="flex gap-4"><i data-lucide="phone" class="w-5 h-5 text-[#C5A059] shrink-0"></i><span>+233 24 123 4567</span></li>
-              <li className="flex gap-4"><i data-lucide="mail" class="w-5 h-5 text-[#C5A059] shrink-0"></i><span>info@taphotelbolga.com</span></li>
+            <h3 style="font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2rem;">Contact Us</h3>
+            <ul style="display: flex; flex-direction: column; gap: 1.5rem; color: rgba(255, 255, 255, 0.6); font-weight: 300;">
+              <li style="display: flex; gap: 1rem;"><i data-lucide="map-pin" style="width: 1.25rem; height: 1.25rem; color: var(--brand-gold); flex-shrink: 0;"></i><span>Bolgatanga, Upper East Region, Ghana</span></li>
+              <li style="display: flex; gap: 1rem;"><i data-lucide="phone" style="width: 1.25rem; height: 1.25rem; color: var(--brand-gold); flex-shrink: 0;"></i><span>+233 24 123 4567</span></li>
+              <li style="display: flex; gap: 1rem;"><i data-lucide="mail" style="width: 1.25rem; height: 1.25rem; color: var(--brand-gold); flex-shrink: 0;"></i><span>info@taphotelbolga.com</span></li>
             </ul>
           </div>
           <div>
-            <h3 class="text-sm font-bold uppercase tracking-widest mb-8">Newsletter</h3>
-            <p class="text-white/50 text-sm mb-6">Subscribe to get special offers and updates.</p>
-            <form class="flex gap-2">
-              <input type="email" placeholder="Your email" class="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm outline-none focus:border-[#C5A059] transition-colors w-full">
-              <button class="bg-[#C5A059] px-4 py-2 rounded-lg text-sm font-bold">JOIN</button>
+            <h3 style="font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2rem;">Newsletter</h3>
+            <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.875rem; margin-bottom: 1.5rem;">Subscribe to get special offers and updates.</p>
+            <form style="display: flex; gap: 0.5rem;">
+              <input type="email" placeholder="Your email" style="background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem; outline: none; transition: border-color 0.3s; width: 100%; color: var(--white);">
+              <button style="background-color: var(--brand-gold); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 700; border: none; cursor: pointer; color: var(--brand-dark);">JOIN</button>
             </form>
           </div>
         </div>
-        <div class="border-t border-white/10 pt-12 flex flex-col md:flex-row justify-between items-center gap-6 text-white/30 text-xs uppercase tracking-widest">
+        <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 3rem; display: flex; flex-direction: column; gap: 1.5rem; align-items: center; justify-content: space-between; color: rgba(255, 255, 255, 0.3); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">
           <p>© 2026 TAP HOTEL BOLGATANGA. ALL RIGHTS RESERVED.</p>
-          <div class="flex gap-8">
-            <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+          <div style="display: flex; gap: 2rem;">
+            <a href="#" style="color: inherit; text-decoration: none; transition: color 0.3s;">Privacy Policy</a>
+            <a href="#" style="color: inherit; text-decoration: none; transition: color 0.3s;">Terms of Service</a>
           </div>
         </div>
       </div>

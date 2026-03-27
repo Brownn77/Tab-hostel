@@ -9,25 +9,25 @@ const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
 
 window.addEventListener('scroll', () => {
   if (window.scrollY > 50) {
-    navbar.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'py-3');
-    navbar.classList.remove('bg-transparent', 'py-4');
-    logoText.classList.add('text-[#1A1A1A]');
+    navbar.classList.add('navbar-scrolled');
+    navbar.classList.remove('navbar-transparent');
+    logoText.classList.add('text-dark');
     logoText.classList.remove('text-white');
-    mobileMenuToggle.classList.add('text-[#1A1A1A]');
+    mobileMenuToggle.classList.add('text-dark');
     mobileMenuToggle.classList.remove('text-white');
     navLinks.forEach(link => {
-      link.classList.add('text-[#1A1A1A]');
+      link.classList.add('text-dark');
       link.classList.remove('text-white');
     });
   } else {
-    navbar.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'py-3');
-    navbar.classList.add('bg-transparent', 'py-4');
-    logoText.classList.remove('text-[#1A1A1A]');
+    navbar.classList.remove('navbar-scrolled');
+    navbar.classList.add('navbar-transparent');
+    logoText.classList.remove('text-dark');
     logoText.classList.add('text-white');
-    mobileMenuToggle.classList.remove('text-[#1A1A1A]');
+    mobileMenuToggle.classList.remove('text-dark');
     mobileMenuToggle.classList.add('text-white');
     navLinks.forEach(link => {
-      link.classList.remove('text-[#1A1A1A]');
+      link.classList.remove('text-dark');
       link.classList.add('text-white');
     });
   }
@@ -36,13 +36,13 @@ window.addEventListener('scroll', () => {
 // Mobile Menu Toggle
 const mobileMenu = document.getElementById('mobile-menu');
 mobileMenuToggle.addEventListener('click', () => {
-  mobileMenu.classList.toggle('hidden');
+  mobileMenu.classList.toggle('active');
 });
 
 // Close mobile menu on link click
 mobileMenu.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
-    mobileMenu.classList.add('hidden');
+    mobileMenu.classList.remove('active');
   });
 });
 
@@ -56,16 +56,16 @@ if (bookingForm) {
     
     // Simulate form submission
     bookingFormContainer.innerHTML = `
-      <div class="text-center py-12">
-        <div class="w-20 h-20 text-[#C5A059] mx-auto mb-6">
+      <div style="text-align: center; padding: 3rem 0;">
+        <div style="width: 5rem; height: 5rem; color: var(--brand-gold); margin: 0 auto 1.5rem auto;">
           <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
         </div>
-        <h2 class="text-4xl font-serif mb-4 text-[#1A1A1A]">Request Received!</h2>
-        <p class="text-gray-500 mb-8">
+        <h2 style="font-size: 2.25rem; margin-bottom: 1rem; color: var(--brand-dark);">Request Received!</h2>
+        <p style="color: var(--gray-500); margin-bottom: 2rem;">
           Thank you for choosing Tap Hotel. Our reservation team will contact you shortly 
           to confirm your booking details.
         </p>
-        <button onclick="window.location.reload()" class="text-[#C5A059] font-bold underline underline-offset-8">
+        <button onclick="window.location.reload()" style="color: var(--brand-gold); font-weight: 700; text-decoration: underline; text-underline-offset: 8px; background: none; border: none; cursor: pointer;">
           Make another request
         </button>
       </div>
