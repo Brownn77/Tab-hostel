@@ -3,11 +3,432 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
+    <title>Tap Hotel Bolgatanga | Luxury in the North</title>
+    <link rel="stylesheet" href="/src/index.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body class="font-sans text-[#1A1A1A] bg-white selection:bg-[#C5A059] selection:text-white">
+    
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <a href="#home" class="flex items-center gap-2">
+          <span class="text-2xl font-serif font-bold tracking-tighter text-white logo-text">
+            TAP HOTEL
+          </span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#home" class="nav-link text-sm font-medium uppercase tracking-widest text-white hover:text-[#C5A059] transition-colors">Home</a>
+          <a href="#about" class="nav-link text-sm font-medium uppercase tracking-widest text-white hover:text-[#C5A059] transition-colors">About</a>
+          <a href="#rooms" class="nav-link text-sm font-medium uppercase tracking-widest text-white hover:text-[#C5A059] transition-colors">Rooms</a>
+          <a href="#amenities" class="nav-link text-sm font-medium uppercase tracking-widest text-white hover:text-[#C5A059] transition-colors">Amenities</a>
+          <a href="#contact" class="nav-link text-sm font-medium uppercase tracking-widest text-white hover:text-[#C5A059] transition-colors">Contact</a>
+          <a href="#booking" class="bg-[#C5A059] text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-opacity-90 transition-all">
+            BOOK NOW
+          </a>
+        </div>
+
+        <!-- Mobile Toggle -->
+        <button id="mobile-menu-toggle" class="md:hidden p-2 text-white">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden absolute top-full left-0 right-0 bg-white shadow-xl p-6 flex flex-col gap-4 md:hidden">
+        <a href="#home" class="text-[#1A1A1A] text-lg font-serif border-b border-gray-100 pb-2">Home</a>
+        <a href="#about" class="text-[#1A1A1A] text-lg font-serif border-b border-gray-100 pb-2">About</a>
+        <a href="#rooms" class="text-[#1A1A1A] text-lg font-serif border-b border-gray-100 pb-2">Rooms</a>
+        <a href="#amenities" class="text-[#1A1A1A] text-lg font-serif border-b border-gray-100 pb-2">Amenities</a>
+        <a href="#contact" class="text-[#1A1A1A] text-lg font-serif border-b border-gray-100 pb-2">Contact</a>
+        <a href="#booking" class="bg-[#C5A059] text-white text-center py-3 rounded-lg font-bold">BOOK NOW</a>
+      </div>
+    </nav>
+
+    <main>
+      <!-- Hero Section -->
+      <section id="home" class="relative h-screen w-full overflow-hidden">
+        <div class="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1920&q=80"
+            alt="Tap Hotel Exterior"
+            class="w-full h-full object-cover"
+            referrerPolicy="no-referrer"
+          />
+          <div class="absolute inset-0 bg-black/40"></div>
+        </div>
+
+        <div class="relative h-full max-w-7xl mx-auto px-6 flex flex-col justify-center items-start">
+          <div class="max-w-2xl">
+            <span class="text-[#C5A059] font-semibold tracking-[0.3em] uppercase mb-4 block">
+              Welcome to Bolgatanga
+            </span>
+            <h1 class="text-5xl md:text-8xl font-serif text-white leading-tight mb-8">
+              Refined Luxury <br />
+              <span class="italic">in the North</span>
+            </h1>
+            <p class="text-white/80 text-lg md:text-xl mb-10 font-light leading-relaxed">
+              Experience the perfect blend of traditional Ghanaian hospitality and modern comfort. 
+              Your gateway to the Upper East Region starts here.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a href="#rooms" class="bg-[#C5A059] text-white px-8 py-4 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-opacity-90 transition-all group">
+                EXPLORE ROOMS
+                <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+              </a>
+              <a href="#about" class="bg-white/10 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-full font-bold hover:bg-white/20 transition-all text-center">
+                OUR STORY
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 flex flex-col items-center gap-2 animate-bounce">
+          <span class="text-[10px] uppercase tracking-widest">Scroll</span>
+          <div class="w-[1px] h-12 bg-white/30"></div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="relative">
+              <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80"
+                  alt="Hotel Lobby"
+                  class="w-full h-auto"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              <div class="absolute -bottom-10 -right-10 w-full h-full bg-[#F9F7F2] -z-10 rounded-3xl"></div>
+              <div class="absolute -top-10 -left-10 bg-[#C5A059] p-8 rounded-2xl text-white hidden md:block">
+                <span class="text-4xl font-serif block mb-1">15+</span>
+                <span class="text-[10px] uppercase tracking-widest font-bold">Years of Excellence</span>
+              </div>
+            </div>
+
+            <div>
+              <span class="text-[#C5A059] font-semibold tracking-widest uppercase text-sm mb-4 block">
+                Our Story
+              </span>
+              <h2 class="text-4xl md:text-5xl font-serif text-[#1A1A1A] mb-8 leading-tight">
+                A Tradition of <br />
+                <span class="italic">Northern Hospitality</span>
+              </h2>
+              <div class="space-y-6 text-gray-600 font-light leading-relaxed">
+                <p>
+                  Tap Hotel has been a landmark of hospitality in Bolgatanga for over a decade. 
+                  We pride ourselves on providing a sanctuary for travelers who appreciate 
+                  the finer things in life while staying connected to the local culture.
+                </p>
+                <p>
+                  Our architecture reflects the strength and beauty of the Upper East Region, 
+                  while our interiors offer the modern luxury you expect from a world-class hotel. 
+                  Whether you're here for a conference or to explore the famous Bolga market and 
+                  Tongo Hills, we ensure your stay is unforgettable.
+                </p>
+              </div>
+              
+              <div class="mt-12 grid grid-cols-2 gap-8">
+                <div>
+                  <h4 class="text-[#1A1A1A] font-serif text-xl mb-2">Our Mission</h4>
+                  <p class="text-sm text-gray-500 font-light">To provide exceptional service that exceeds expectations.</p>
+                </div>
+                <div>
+                  <h4 class="text-[#1A1A1A] font-serif text-xl mb-2">Our Vision</h4>
+                  <p class="text-sm text-gray-500 font-light">To be the leading hospitality destination in Northern Ghana.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Rooms Section -->
+      <section id="rooms" class="py-24 bg-[#F9F7F2]">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-serif text-[#1A1A1A] mb-4">
+              Luxurious Accommodations
+            </h2>
+            <div class="w-24 h-[1px] bg-[#C5A059] mx-auto mb-6"></div>
+            <p class="text-gray-600 max-w-2xl mx-auto font-light">
+              Each of our rooms is designed with your comfort in mind, featuring elegant decor 
+              and modern amenities to ensure a restful stay.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Standard Room -->
+            <div class="bg-white group overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
+              <div class="relative h-64 overflow-hidden">
+                <img src="https://picsum.photos/seed/hotel-room-1/800/600" alt="Standard Room" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer">
+                <div class="absolute top-4 right-4 bg-[#1A1A1A] text-white px-4 py-2 text-sm font-bold">GHS 350 / night</div>
+              </div>
+              <div class="p-8">
+                <h3 class="text-2xl font-serif text-[#1A1A1A] mb-3">Standard Room</h3>
+                <p class="text-gray-500 text-sm mb-6 leading-relaxed">Comfortable and cozy room perfect for solo travelers or couples.</p>
+                <div class="flex flex-wrap gap-4 mb-8">
+                  <div class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="wifi" class="w-3 h-3"></i> Wi-Fi</div>
+                  <div class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="wind" class="w-3 h-3"></i> AC</div>
+                  <div class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="tv" class="w-3 h-3"></i> TV</div>
+                </div>
+                <button class="w-full border border-[#1A1A1A] py-3 text-sm font-bold tracking-widest hover:bg-[#1A1A1A] hover:text-white transition-all">VIEW DETAILS</button>
+              </div>
+            </div>
+
+            <!-- Deluxe Room -->
+            <div class="bg-white group overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
+              <div class="relative h-64 overflow-hidden">
+                <img src="https://picsum.photos/seed/hotel-room-2/800/600" alt="Deluxe Room" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer">
+                <div class="absolute top-4 right-4 bg-[#1A1A1A] text-white px-4 py-2 text-sm font-bold">GHS 550 / night</div>
+              </div>
+              <div class="p-8">
+                <h3 class="text-2xl font-serif text-[#1A1A1A] mb-3">Deluxe Room</h3>
+                <p class="text-gray-500 text-sm mb-6 leading-relaxed">Spacious room with enhanced amenities and a beautiful city view.</p>
+                <div class="flex flex-wrap gap-4 mb-8">
+                  <div class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="wifi" class="w-3 h-3"></i> Wi-Fi</div>
+                  <div class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="wind" class="w-3 h-3"></i> AC</div>
+                  <div class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="coffee" class="w-3 h-3"></i> Breakfast</div>
+                </div>
+                <button class="w-full border border-[#1A1A1A] py-3 text-sm font-bold tracking-widest hover:bg-[#1A1A1A] hover:text-white transition-all">VIEW DETAILS</button>
+              </div>
+            </div>
+
+            <!-- Executive Suite -->
+            <div class="bg-white group overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
+              <div class="relative h-64 overflow-hidden">
+                <img src="https://picsum.photos/seed/hotel-room-3/800/600" alt="Executive Suite" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer">
+                <div class="absolute top-4 right-4 bg-[#1A1A1A] text-white px-4 py-2 text-sm font-bold">GHS 850 / night</div>
+              </div>
+              <div class="p-8">
+                <h3 class="text-2xl font-serif text-[#1A1A1A] mb-3">Executive Suite</h3>
+                <p class="text-gray-500 text-sm mb-6 leading-relaxed">The pinnacle of luxury with a separate living area and premium services.</p>
+                <div class="flex flex-wrap gap-4 mb-8">
+                  <div class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="wifi" class="w-3 h-3"></i> Wi-Fi</div>
+                  <div class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="waves" class="w-3 h-3"></i> VIP</div>
+                  <div class="flex items-center gap-1 text-xs text-gray-400"><i data-lucide="coffee" class="w-3 h-3"></i> Breakfast</div>
+                </div>
+                <button class="w-full border border-[#1A1A1A] py-3 text-sm font-bold tracking-widest hover:bg-[#1A1A1A] hover:text-white transition-all">VIEW DETAILS</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Amenities Section -->
+      <section id="amenities" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
+            <div class="max-w-xl">
+              <span class="text-[#C5A059] font-semibold tracking-widest uppercase text-sm mb-4 block">
+                Our Services
+              </span>
+              <h2 class="text-4xl md:text-5xl font-serif text-[#1A1A1A]">
+                Everything you need for a <span class="italic">perfect stay</span>
+              </h2>
+            </div>
+            <p class="text-gray-500 font-light max-w-sm">
+              Beyond comfortable rooms, we offer a range of facilities designed to make your 
+              visit to Bolgatanga productive and enjoyable.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+            <div class="group">
+              <div class="mb-6 inline-block p-4 bg-[#F9F7F2] rounded-2xl group-hover:bg-[#C5A059] group-hover:text-white transition-all duration-300">
+                <i data-lucide="utensils" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-xl font-serif text-[#1A1A1A] mb-2">Fine Dining</h3>
+              <p class="text-gray-500 text-sm font-light leading-relaxed">Authentic local and continental dishes.</p>
+            </div>
+            <div class="group">
+              <div class="mb-6 inline-block p-4 bg-[#F9F7F2] rounded-2xl group-hover:bg-[#C5A059] group-hover:text-white transition-all duration-300">
+                <i data-lucide="beer" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-xl font-serif text-[#1A1A1A] mb-2">Lounge Bar</h3>
+              <p class="text-gray-500 text-sm font-light leading-relaxed">Relax with our selection of premium drinks.</p>
+            </div>
+            <div class="group">
+              <div class="mb-6 inline-block p-4 bg-[#F9F7F2] rounded-2xl group-hover:bg-[#C5A059] group-hover:text-white transition-all duration-300">
+                <i data-lucide="users" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-xl font-serif text-[#1A1A1A] mb-2">Conferences</h3>
+              <p class="text-gray-500 text-sm font-light leading-relaxed">Modern facilities for your business meetings.</p>
+            </div>
+            <div class="group">
+              <div class="mb-6 inline-block p-4 bg-[#F9F7F2] rounded-2xl group-hover:bg-[#C5A059] group-hover:text-white transition-all duration-300">
+                <i data-lucide="waves" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-xl font-serif text-[#1A1A1A] mb-2">Swimming Pool</h3>
+              <p class="text-gray-500 text-sm font-light leading-relaxed">A refreshing oasis in the Bolga sun.</p>
+            </div>
+            <div class="group">
+              <div class="mb-6 inline-block p-4 bg-[#F9F7F2] rounded-2xl group-hover:bg-[#C5A059] group-hover:text-white transition-all duration-300">
+                <i data-lucide="shield-check" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-xl font-serif text-[#1A1A1A] mb-2">Security</h3>
+              <p class="text-gray-500 text-sm font-light leading-relaxed">24/7 professional security for your peace of mind.</p>
+            </div>
+            <div class="group">
+              <div class="mb-6 inline-block p-4 bg-[#F9F7F2] rounded-2xl group-hover:bg-[#C5A059] group-hover:text-white transition-all duration-300">
+                <i data-lucide="washing-machine" class="w-8 h-8"></i>
+              </div>
+              <h3 class="text-xl font-serif text-[#1A1A1A] mb-2">Laundry</h3>
+              <p class="text-gray-500 text-sm font-light leading-relaxed">Professional cleaning services for our guests.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Booking Section -->
+      <section id="booking" class="py-24 bg-[#1A1A1A] text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-[#C5A059]/10 blur-[100px] rounded-full -mr-48 -mt-48"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#C5A059]/5 blur-[100px] rounded-full -ml-48 -mb-48"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <span class="text-[#C5A059] font-semibold tracking-widest uppercase text-sm mb-4 block">Reservations</span>
+              <h2 class="text-4xl md:text-6xl font-serif mb-8 leading-tight">Book your stay <br><span class="italic text-[#C5A059]">with us today</span></h2>
+              <p class="text-white/60 text-lg font-light leading-relaxed mb-8">
+                Planning a visit to Bolgatanga? Secure your room now and enjoy our 
+                premium hospitality. For urgent bookings, call us directly at 
+                <span class="text-white font-medium ml-2">+233 24 123 4567</span>.
+              </p>
+              <div class="space-y-6">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
+                    <i data-lucide="check-circle-2" class="w-6 h-6 text-[#C5A059]"></i>
+                  </div>
+                  <span class="text-white/80">Instant confirmation for online requests</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
+                    <i data-lucide="check-circle-2" class="w-6 h-6 text-[#C5A059]"></i>
+                  </div>
+                  <span class="text-white/80">No hidden charges or booking fees</span>
+                </div>
+              </div>
+            </div>
+
+            <div id="booking-form-container" class="bg-white p-8 md:p-12 rounded-3xl shadow-2xl text-[#1A1A1A]">
+              <form id="booking-form" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="space-y-2">
+                    <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Check-In</label>
+                    <div class="relative">
+                      <i data-lucide="calendar" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
+                      <input type="date" required class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-[#C5A059]/20 focus:border-[#C5A059] outline-none transition-all">
+                    </div>
+                  </div>
+                  <div class="space-y-2">
+                    <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Check-Out</label>
+                    <div class="relative">
+                      <i data-lucide="calendar" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
+                      <input type="date" required class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-[#C5A059]/20 focus:border-[#C5A059] outline-none transition-all">
+                    </div>
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="space-y-2">
+                    <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Guests</label>
+                    <div class="relative">
+                      <i data-lucide="users" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
+                      <select required class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-[#C5A059]/20 focus:border-[#C5A059] outline-none transition-all appearance-none">
+                        <option value="">Select guests</option>
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4+ Guests</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="space-y-2">
+                    <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Room Type</label>
+                    <div class="relative">
+                      <i data-lucide="home" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
+                      <select required class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-[#C5A059]/20 focus:border-[#C5A059] outline-none transition-all appearance-none">
+                        <option value="">Select room</option>
+                        <option value="standard">Standard Room</option>
+                        <option value="deluxe">Deluxe Room</option>
+                        <option value="executive">Executive Suite</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="space-y-2">
+                  <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Full Name</label>
+                  <input type="text" required placeholder="John Doe" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-[#C5A059]/20 focus:border-[#C5A059] outline-none transition-all">
+                </div>
+                <div class="space-y-2">
+                  <label class="text-xs font-bold uppercase tracking-widest text-gray-400">Email Address</label>
+                  <input type="email" required placeholder="john@example.com" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-[#C5A059]/20 focus:border-[#C5A059] outline-none transition-all">
+                </div>
+                <button type="submit" class="w-full bg-[#C5A059] text-white py-4 rounded-xl font-bold tracking-widest hover:bg-opacity-90 transition-all shadow-lg shadow-[#C5A059]/20">REQUEST BOOKING</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-[#1A1A1A] text-white pt-24 pb-12">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-24">
+          <div class="col-span-1 lg:col-span-1">
+            <h2 class="text-3xl font-serif mb-6 tracking-tighter">TAP HOTEL</h2>
+            <p class="text-white/50 font-light leading-relaxed mb-8">Experience the best of Northern Ghana hospitality. Luxury, comfort, and culture all in one place.</p>
+            <div class="flex gap-4">
+              <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#C5A059] transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+              <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#C5A059] transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+              <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#C5A059] transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold uppercase tracking-widest mb-8">Quick Links</h3>
+            <ul class="space-y-4 text-white/60 font-light">
+              <li><a href="#home" class="hover:text-[#C5A059] transition-colors">Home</a></li>
+              <li><a href="#rooms" class="hover:text-[#C5A059] transition-colors">Rooms & Suites</a></li>
+              <li><a href="#amenities" class="hover:text-[#C5A059] transition-colors">Amenities</a></li>
+              <li><a href="#about" class="hover:text-[#C5A059] transition-colors">About Us</a></li>
+              <li><a href="#booking" class="hover:text-[#C5A059] transition-colors">Reservations</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold uppercase tracking-widest mb-8">Contact Us</h3>
+            <ul class="space-y-6 text-white/60 font-light">
+              <li class="flex gap-4"><i data-lucide="map-pin" class="w-5 h-5 text-[#C5A059] shrink-0"></i><span>Bolgatanga, Upper East Region, Ghana</span></li>
+              <li className="flex gap-4"><i data-lucide="phone" class="w-5 h-5 text-[#C5A059] shrink-0"></i><span>+233 24 123 4567</span></li>
+              <li className="flex gap-4"><i data-lucide="mail" class="w-5 h-5 text-[#C5A059] shrink-0"></i><span>info@taphotelbolga.com</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold uppercase tracking-widest mb-8">Newsletter</h3>
+            <p class="text-white/50 text-sm mb-6">Subscribe to get special offers and updates.</p>
+            <form class="flex gap-2">
+              <input type="email" placeholder="Your email" class="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm outline-none focus:border-[#C5A059] transition-colors w-full">
+              <button class="bg-[#C5A059] px-4 py-2 rounded-lg text-sm font-bold">JOIN</button>
+            </form>
+          </div>
+        </div>
+        <div class="border-t border-white/10 pt-12 flex flex-col md:flex-row justify-between items-center gap-6 text-white/30 text-xs uppercase tracking-widest">
+          <p>© 2026 TAP HOTEL BOLGATANGA. ALL RIGHTS RESERVED.</p>
+          <div class="flex gap-8">
+            <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>
 
